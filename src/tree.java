@@ -1,5 +1,4 @@
 import java.util.*;
-import java.util.ArrayList;
 
 class main {
     public static class Node {
@@ -65,7 +64,6 @@ class main {
 
     public static int height(Node root) {
         if (root == null || (root.left == null && root.right == null)) return 0;
-
         return 1 + Math.max(height(root.left), height(root.right));
     }   //  Height of tree
 
@@ -118,8 +116,21 @@ class main {
         int temp=root1.data;
         root1.data=root2.data;
         root2.data=temp;
-    }
+    }  // Swap the TreeNode values
 
+    public static boolean isBalanced(Node root){
+        if(root==null) return true;
+
+        int lh=height(root.left);
+        if(root.left!=null) lh++;
+        int rh=height(root.right);
+        if(root.right!=null) rh++;
+        int d=lh-rh;
+        if(d<0) d=-d;
+        if(d>1) return false;
+
+        return (isBalanced(root.left)  &&  isBalanced(root.right));
+    }
 
 
 
@@ -140,15 +151,6 @@ class main {
         b.left=e;
         b.right=f;
         Node temp=root;
-
         preorder(root);
-        System.out.println();
-        System.out.println();
-
-
-
-
-
-
     }
 }
