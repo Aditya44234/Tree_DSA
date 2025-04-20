@@ -1,6 +1,6 @@
 import java.util.*;
 
-class main {
+class tree {
     public static class Node {
         int data;
         Node left;
@@ -132,25 +132,76 @@ class main {
         return (isBalanced(root.left)  &&  isBalanced(root.right));
     }
 
+    public static boolean isSameTree(Node a,Node b){
+        if(a==null && b==null) return true;
+
+        if(a.data!=b.data) return false;
+
+        return (isSameTree(a.left,b.left)  && isSameTree(a.right,b.right));
+    }
+
+    public static void helper(Node root,List<String>  ans,String str){
+        if(root==null) return;
+
+        if(root.left==null && root.right==null){
+            str+=root.data;
+            ans.add(str);
+            return;
+        }
+
+        helper(root.left,ans,str+root.data+"-->");
+        helper(root.right,ans,str+root.data+"-->");
+
+    }
+
+    public static List<String> treePath(Node root){
+        List<String> ans=new ArrayList<>();
+
+        helper(root,ans,"");
+
+        return ans;
+    }
+
+
+
 
 
 
 
     public static void main(String[] args) {
-        Node root=new Node(1);
-        Node a=new Node(2);
-        Node b=new Node(3);
-        Node c=new Node(4);
-        Node d=new Node(5);
-        Node e=new Node(6);
-        Node f=new Node(7);
-        root.left=a;
-        root.right=b;
-        a.left=c;
-        a.right=d;
-        b.left=e;
-        b.right=f;
-        Node temp=root;
-        preorder(root);
+        Node root1=new Node(1);
+        Node a1=new Node(2);
+        Node b1=new Node(3);
+        Node c1=new Node(4);
+        Node d1=new Node(5);
+
+        root1.left=a1;
+        root1.right=b1;
+        a1.left=c1;
+        a1.right=d1;
+
+        Node root2=new Node(1);
+        Node a2=new Node(2);
+        Node b2=new Node(3);
+
+        root2.left=a2;
+        root2.right=b2;
+
+       preorder(root1);
+        System.out.println();
+
+        System.out.println(treePath(root1));
+
+        System.out.println("Hello World");
+
+
+
+
+
+
+
+
+
+
     }
 }
